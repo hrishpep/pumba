@@ -91,6 +91,7 @@ export class ObservationsPage implements OnInit {
     }
 
 
+
     sym['name'] = this.user_symptoms[aI].name
     sym['sub_type']= this.user_symptoms[aI].sub_type
     sym['desc']= this.user_symptoms[aI].desc
