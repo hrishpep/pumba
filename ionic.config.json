@@ -1,0 +1,7 @@
+{
+  "name": "pumba",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
