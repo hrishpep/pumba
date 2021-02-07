@@ -1,0 +1,60 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* HB added the line below based on this tutorial 
+    https://github.com/RaphaelJenni/FirebaseUI-Angular
+*/
+@import '~firebaseui/dist/firebaseui.css';
+
+
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+
+//hb: added so that even on wide devices the 
+// app looks appropriate
+.ion-page {
+    max-width: 700px;
+    margin: auto;
+}
+
+//hb: added from experimentation https://ionicframework.com/docs/theming/colors
+:root {
+    --ion-color-shakti: #ec3c8b;
+    --ion-color-shakti-rgb: 236,60,139;
+    --ion-color-shakti-contrast: #ffffff;
+    --ion-color-shakti-contrast-rgb: 255,255,255;
+    --ion-color-shakti-shade: #d0357a;
+    --ion-color-shakti-tint: #ee5097;
+  }
+  
+  .ion-color-shakti {
+    --ion-color-base: var(--ion-color-shakti);
+    --ion-color-base-rgb: var(--ion-color-shakti-rgb);
+    --ion-color-contrast: var(--ion-color-shakti-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-shakti-contrast-rgb);
+    --ion-color-shade: var(--ion-color-shakti-shade);
+    --ion-color-tint: var(--ion-color-shakti-tint);
+  }
