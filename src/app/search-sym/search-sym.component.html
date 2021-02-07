@@ -1,0 +1,19 @@
+<ion-searchbar (ngModelChange)="suggestions($event)" 
+    placeholder="symptom you want to track" 
+    [debounce]="debounce" 
+    [(ngModel)]="search_phrase">
+ </ion-searchbar>
+ 
+<ion-list>
+  <div *ngFor="let category of searchResultDividers">
+    <ion-item-divider>{{category}}</ion-item-divider>
+    <div  *ngFor="let sym of searchResults; let i = index">
+    <ion-item  *ngIf="sym.name == category" (click)="select(i)" >
+      <ion-label>
+        {{sym.sub_type}}
+        <p> {{sym.desc}}</p>
+    </ion-label>
+    </ion-item>
+    </div>
+  </div>
+</ion-list>

@@ -1,0 +1,187 @@
+<!-- Input Labels -->
+  <ion-list>
+
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="save()">Save</ion-button>
+      <ion-button (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  
+    <ion-item>
+      <ion-label position="floating" color="primary">Type</ion-label>
+      <ion-input [(ngModel)]="value.name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating" color="primary">Subtype</ion-label>
+      <ion-input [(ngModel)]="value.sub_type"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating" color="primary">Description</ion-label>
+      <ion-input inputmode="text" maxlength="70" [(ngModel)]="value.desc" placeholder="short description (100 char)"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>This symptom is a Vikruti</ion-label>
+      <ion-toggle [(ngModel)]="value.isVikruti"></ion-toggle>
+    </ion-item>
+    <br/>
+
+    <div  *ngIf="value.isVikruti">
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Causal Analysis</ion-label>
+      </ion-list-header>
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>Dosha Levels</ion-label>
+        </ion-item-divider>
+        <ion-item>
+          <ion-label>Kapha</ion-label>
+          <ion-select interface="popover" [(ngModel)]="value.klevel">
+            <ion-select-option value="vlow">Very Low</ion-select-option>
+            <ion-select-option value="low">Low</ion-select-option>
+            <ion-select-option value="normal">Normal</ion-select-option>
+            <ion-select-option value="high">High</ion-select-option>
+            <ion-select-option value="vhigh">Very High</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Pitta</ion-label>
+          <ion-select interface="popover" [(ngModel)]="value.plevel">
+            <ion-select-option value="vlow">Very Low</ion-select-option>
+            <ion-select-option value="low">Low</ion-select-option>
+            <ion-select-option value="normal">Normal</ion-select-option>
+            <ion-select-option value="high">High</ion-select-option>
+            <ion-select-option value="vhigh">Very High</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Vaat</ion-label>
+          <ion-select interface="popover" [(ngModel)]="value.vlevel">
+            <ion-select-option value="vlow">Very Low</ion-select-option>
+            <ion-select-option value="low">Low</ion-select-option>
+            <ion-select-option value="normal">Normal</ion-select-option>
+            <ion-select-option value="high">High</ion-select-option>
+            <ion-select-option value="vhigh">Very High</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+      </ion-item-group>
+
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>Dosha & Mala Avaran</ion-label>
+        </ion-item-divider>
+
+        <ion-item>
+          <ion-label>Avarak (covering)</ion-label>
+          <ion-select interface="popover" [(ngModel)]="value.avarakMD">
+            <ion-select-option value="kapha">Kapha</ion-select-option>
+            <ion-select-option value="pitta">Pitta</ion-select-option>
+            <ion-select-option value="rakta">Rakta</ion-select-option>
+            <ion-select-option value="mansa">Mansa</ion-select-option>
+            <ion-select-option value="medha">Medha</ion-select-option>
+            <ion-select-option value="asthi">Asthi</ion-select-option>
+            <ion-select-option value="tantu">Tantu</ion-select-option>
+            <ion-select-option value="shukra">Shukra</ion-select-option>
+            <ion-select-option value="anna">Anna</ion-select-option>
+            <ion-select-option value="mala">Mala</ion-select-option>
+            <ion-select-option value="mutra">Mutra</ion-select-option>
+            <ion-select-option value="all_dhatu">All Dhatu</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>Avrutta (covered)</ion-label>
+          <ion-select interface="popover" [(ngModel)]="value.avruttaMD">
+            <ion-select-option value="vaat_general">Vaat (general)</ion-select-option> 
+            <ion-select-option value="prana">Prana</ion-select-option>
+            <ion-select-option value="vyana">Vyana</ion-select-option>
+            <ion-select-option value="apana">Apana</ion-select-option>
+            <ion-select-option value="samana">Samana</ion-select-option>
+            <ion-select-option value="udana">Udana</ion-select-option>
+          </ion-select>
+        </ion-item>    
+
+        </ion-item-group>
+
+        <ion-item-group>
+          <ion-item-divider>
+            <ion-label>Annyonya Avaran</ion-label>
+          </ion-item-divider>
+  
+          <ion-item>
+            <ion-label>Avarak (covering)</ion-label>
+            <ion-select interface="popover" [(ngModel)]="value.avarakVV">
+              <ion-select-option value="prana">Prana</ion-select-option>
+              <ion-select-option value="vyana">Vyana</ion-select-option>
+              <ion-select-option value="apana">Apana</ion-select-option>
+              <ion-select-option value="samana">Samana</ion-select-option>
+              <ion-select-option value="udana">Udana</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>Avrutta (covered)</ion-label>
+            <ion-select interface="popover" [(ngModel)]="value.avruttaVV">
+              <ion-select-option value="prana">Prana</ion-select-option>
+              <ion-select-option value="vyana">Vyana</ion-select-option>
+              <ion-select-option value="apana">Apana</ion-select-option>
+              <ion-select-option value="samana">Samana</ion-select-option>
+              <ion-select-option value="udana">Udana</ion-select-option>
+            </ion-select>
+          </ion-item>    
+  
+          </ion-item-group>
+  
+
+    </ion-list>
+    </div>
+<!-- 
+    <ion-radio-group [value]='value.answer_type' (ionChange)="answer_changed($event)">
+      <ion-item slot="start">
+        <ion-label>By choosing from list of options</ion-label>
+        <ion-radio slot="start" value="options" ></ion-radio>
+      </ion-item>
+
+      <ion-item slot="end">
+        <ion-label>By choosing value from a range</ion-label>
+        <ion-radio slot="start" value="range"></ion-radio>
+      </ion-item>
+
+    </ion-radio-group>
+
+    <br/>
+-->
+
+    <ion-list *ngIf="value.answer_type == 'options'">
+      <ion-list-header>
+        <ion-label>
+          Options presented to user
+        </ion-label>
+      </ion-list-header>
+      
+      <div *ngFor='let o of value.options; let i = index'>
+        <app-option [value]="o" (optionChanged)="update_option(i, $event)" (optionRemoveRequested)="remove_option(i,$event)"></app-option>
+      </div>
+      <ion-item>
+        <ion-icon name="add-outline" (click)="add_new_option()"></ion-icon>
+      </ion-item>
+    </ion-list>
+   
+
+    <ion-list *ngIf="value.answer_type == 'range'">
+      <ion-list-header>
+        <ion-label>
+          User's View
+        </ion-label>
+      </ion-list-header>
+      <div>
+        <app-range [value]='value.range'></app-range>
+      </div>
+    </ion-list>
+  </ion-list>

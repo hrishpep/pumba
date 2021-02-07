@@ -1,0 +1,23 @@
+<ion-item>
+  <p>{{value.start_label}}</p>
+  <ion-range pin="true" [min]="value.start" [max]="value.end" [step]="value.step" snaps="true"></ion-range>
+  <p>{{value.end_label}}</p>
+</ion-item>
+
+<ion-item>
+  <ion-label color="primary">Start</ion-label>
+  <ion-input [(ngModel)]="value.start"></ion-input>
+
+  <ion-label color="primary">Label</ion-label>
+  <ion-input [(ngModel)]="value.start_label"></ion-input>
+
+</ion-item>
+
+<ion-item>
+  <ion-label color="primary">end</ion-label>
+  <ion-input [(ngModel)]="value.end"></ion-input>
+
+  <ion-label color="primary">Label</ion-label>
+  <ion-input [(ngModel)]="value.end_label"></ion-input>
+</ion-item>
+

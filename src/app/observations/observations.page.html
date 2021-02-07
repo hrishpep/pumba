@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <ion-label><h1>Watch symptoms</h1>
+      </ion-label></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-search-sym [debounce]="200" (selected)="new_observation($event)"></app-search-sym>
+
+  <ion-list *ngIf="user_symptoms && user_symptoms.length > 0">
+    <ion-item-divider>Under my watch</ion-item-divider>
+    <div *ngFor="let sym of user_symptoms; let i = index;">
+
+      <ion-item-sliding>
+        <ion-item-options side="end">
+          <ion-item-option (click)='hide_sym(i)' color="danger" expandable>
+            <ion-icon slot="icon-only" name="eye-off-outline"></ion-icon>
+            <ion-label>Hide</ion-label>
+          </ion-item-option>
+        </ion-item-options>          
+
+        <!-- display_flag identifies the most recent record for user. whie hide identified 
+        if the user wants to see data related to that symptom or not that is how they are different-->
+      <ion-item *ngIf="i != active_index && sym._display_flag && !sym.hide"(click)="edit_sym(i)">
+        <ion-label>{{sym.sub_type}}<p>{{sym.createTime}}</p></ion-label>
+        <ion-badge slot="end"><ion-label>{{sym.range.value}}</ion-label></ion-badge>
+      </ion-item>
+    </ion-item-sliding>
+
+      <ion-card *ngIf="i == active_index" focus="true">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-label><h1>{{sym.sub_type}}</h1></ion-label>
+          </ion-card-title>
+          <ion-card-subtitle>
+            <ion-label>
+              <h3>{{sym.name}}</h3>
+            </ion-label>
+          </ion-card-subtitle>  
+        </ion-card-header>
+        <ion-card-content>
+            <ion-item>
+              <p>{{sym.desc}}</p>
+          </ion-item>
+          <ion-item>
+              <p>{{sym.range.start_label}}</p>
+              <ion-range pin="true" [min]="sym.range.start" [max]="sym.range.end" [step]="sym.range.step" [(ngModel)]="sym.range.value" snaps="true"></ion-range>
+              <p>{{sym.range.end_label}}</p>
+          </ion-item>
+          <ion-toolbar *ngIf="active_index == i">
+            <ion-buttons slot="start"> <ion-button (click)="(cancel_sym_edit(i))"> Cancel </ion-button> </ion-buttons>
+            <ion-buttons slot="end"> <ion-button (click)="(add_sym_obs())"> Done </ion-button> </ion-buttons>
+          </ion-toolbar>
+            </ion-card-content>
+      </ion-card>
+      </div>
+  </ion-list>
+
+
+  <ion-list>
+    <ion-item-divider>Current Holistic Actions</ion-item-divider>
+    <ion-list>
+
+    </ion-list>
+  </ion-list>
+
+
+
+</ion-content>
+<ion-footer>
+  <section class="full-width">
+    <ion-button expand="full" color="danger">
+     <ion-label *ngIf="!clicked_suggest" (click)="clicked_suggest=true">Holitic Resolution for Symptoms</ion-label>
+     <ion-spinner *ngIf="clicked_suggest"></ion-spinner>
+    </ion-button>
+    
+  </section>
+</ion-footer>

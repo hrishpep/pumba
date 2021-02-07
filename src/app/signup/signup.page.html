@@ -1,0 +1,27 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title slot="start">
+      Sign-In
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true"> 
+  <div id="container">
+
+    <!-- refer to documentation here 
+    https://github.com/RaphaelJenni/FirebaseUI-Angular
+    --> 
+    <firebase-ui (signInSuccessWithAuthResult)="loginSucceeded($event)" 
+    (signInFailure)="loginFailed($event)" ></firebase-ui>
+    <!--
+    <strong>Ready to create an app?</strong>
+    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    -->
+  </div>
+
+  <ion-buttons *ngIf="isSignedIn">
+    <ion-button color="primary" (click)="logout()">logout</ion-button>
+  </ion-buttons>
+
+</ion-content>
