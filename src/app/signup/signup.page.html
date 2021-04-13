@@ -1,13 +1,19 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title slot="start">
-      Sign-In
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content [fullscreen]="true"> 
   <div id="container">
+    <ion-img src="assets/logo.png" style="height:200px; "></ion-img>
+    <br/>
+    <br/>    
+    <br/>
+
+    <ion-label *ngIf="isSignedIn">You are signed in. 
+      <ion-router-link href="mytest">Click here to proceed to your VPK test</ion-router-link>
+    </ion-label>
+   
+    <br/>
+    <br/>
+
+      <ion-button *ngIf="isSignedIn" color="danger" (click)="logout()">Sign Out</ion-button>
 
     <!-- refer to documentation here 
     https://github.com/RaphaelJenni/FirebaseUI-Angular
@@ -20,8 +26,6 @@
     -->
   </div>
 
-  <ion-buttons *ngIf="isSignedIn">
-    <ion-button color="primary" (click)="logout()">logout</ion-button>
-  </ion-buttons>
+  
 
 </ion-content>

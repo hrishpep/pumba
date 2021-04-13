@@ -33,7 +33,7 @@ export class SignupPage implements OnInit {
   }
 
   loginSucceeded(evt) {
-    this._router.navigate(['/mytest'])
+    this._router.navigate(['mytest'])
     console.log('login was successful')
     console.log(evt)
 

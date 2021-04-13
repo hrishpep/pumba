@@ -14,8 +14,9 @@ export class VpkprofilePage implements OnInit {
 
   ngOnInit() {
     this.uS.get_vpk_analysis().subscribe (val=> {
-      this.value = val
+      this.value = val;
     })
+    console.log('(((_)))',this.value)
   }
 
 }

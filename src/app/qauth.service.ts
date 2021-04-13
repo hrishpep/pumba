@@ -9,8 +9,6 @@ export class QUser {
   picURL:string;
 }
 
-
-
 @Injectable({
   providedIn: 'root'
 })

@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'mytest',
+    redirectTo: 'vpkprofile',
     pathMatch: 'full'
   },
   {
@@ -40,7 +40,8 @@ const routes: Routes = [
   },
   {
     path: 'vpkprofile',
-    loadChildren: () => import('./vpkprofile/vpkprofile.module').then( m => m.VpkprofilePageModule)
+    loadChildren: () => import('./vpkprofile/vpkprofile.module').then( m => m.VpkprofilePageModule),
+    canActivate: [RouteGuard]
   }
 ];
 

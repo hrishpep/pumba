@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore'
-import { Observable, Subject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { ObservationsPage } from './observations/observations.page';
 import { QAuthService, QUser } from './qauth.service';
 
@@ -16,13 +16,13 @@ export class UserObs {
 export class UserService {
 
   public user:QUser;
-  public obs:Subject<any>;
-  public vpkAnalysis:Subject<any>;
+  public obs:BehaviorSubject<any>;
+  public vpkAnalysis:BehaviorSubject<any>;
 
   constructor(private firestore: AngularFirestore, private qAuth:QAuthService) { 
 
-    this.obs = new Subject<any>();
-    this.vpkAnalysis = new Subject<any>();
+    this.obs = new BehaviorSubject<any>(null);
+    this.vpkAnalysis = new BehaviorSubject<any>(null);
 
     this.qAuth.user.subscribe( u => { 
       console.log(u)
@@ -55,9 +55,9 @@ export class UserService {
 
       this.firestore.collection('user/'+ this.user.uid+'/vpk-analysis').
         valueChanges({ idField: 'doc_id' }).subscribe(
-          vpkAnalysis => { 
-            console.log(vpkAnalysis);
-            this.vpkAnalysis.next(vpkAnalysis)}
+          _vpkAnalysis => { 
+            console.log(_vpkAnalysis);
+            this.vpkAnalysis.next(_vpkAnalysis)}
         )
 
 
@@ -69,6 +69,7 @@ export class UserService {
   }
 
   get_vpk_analysis() {
+    console.log(':::::::: ',this.vpkAnalysis)
     return this.vpkAnalysis;
   }
 
