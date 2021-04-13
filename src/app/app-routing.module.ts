@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { RouteGuard } from './RouteGuard'
 
 const routes: Routes = [
   {
@@ -8,12 +9,18 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'welcome',
+    redirectTo: 'mytest',
     pathMatch: 'full'
   },
   {
     path: 'welcome',
-    loadChildren: () => import('./welcome/welcome.module').then( m => m.WelcomePageModule)
+    loadChildren: () => import('./welcome/welcome.module').then( m => m.WelcomePageModule),
+    canActivate: [RouteGuard]
+  },
+  {
+    path: 'mytest',
+    loadChildren: () => import('./mytest/mytest.module').then( m => m.MytestPageModule),
+    canActivate: [RouteGuard]
   },
   {
     path: 'signup',
@@ -26,6 +33,14 @@ const routes: Routes = [
   {
     path: 'observations',
     loadChildren: () => import('./observations/observations.module').then( m => m.ObservationsPageModule)
+  },
+  {
+    path: 'mytest',
+    loadChildren: () => import('./mytest/mytest.module').then( m => m.MytestPageModule)
+  },
+  {
+    path: 'vpkprofile',
+    loadChildren: () => import('./vpkprofile/vpkprofile.module').then( m => m.VpkprofilePageModule)
   }
 ];
 

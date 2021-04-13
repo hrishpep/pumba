@@ -23,7 +23,7 @@
 
         <!-- display_flag identifies the most recent record for user. whie hide identified 
         if the user wants to see data related to that symptom or not that is how they are different-->
-      <ion-item *ngIf="i != active_index"(click)="edit_sym(i)">
+      <ion-item *ngIf="i != active_index && sym._display_flag && !sym.hide"(click)="edit_sym(i)">
         <ion-label>{{sym.sub_type}}<p>{{sym.createTime}}</p></ion-label>
         <ion-badge slot="end"><ion-label>{{sym.range.value}}</ion-label></ion-badge>
       </ion-item>

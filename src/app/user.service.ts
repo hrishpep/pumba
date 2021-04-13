@@ -17,30 +17,30 @@ export class UserService {
 
   public user:QUser;
   public obs:Subject<any>;
+  public vpkAnalysis:Subject<any>;
 
   constructor(private firestore: AngularFirestore, private qAuth:QAuthService) { 
 
-    this.obs = new Subject<any>()
+    this.obs = new Subject<any>();
+    this.vpkAnalysis = new Subject<any>();
 
     this.qAuth.user.subscribe( u => { 
       console.log(u)
       this.user= u; 
       this.firestore.collection('user/'+ this.user.uid+'/observations', 
-              ref => ref.where("latest","==",true).where("show","==",true).orderBy("sym_doc_id").orderBy("createTime","desc")
+              ref => ref.orderBy("sym_doc_id").orderBy("createTime","desc")
           ).valueChanges({ idField: 'doc_id' }).subscribe(
         user_observations => { 
 
           let last_index_name_desc = null
           for (let o of user_observations) { 
 
-            /*
             // mark the first element of each time as _display_flag = true
             if(o['name'] + o['desc'] != last_index_name_desc) {
               //most recent element of it's type (name + desc) -> this is guaranteed by the order by in ///the query
               o['_display_flag'] = true
               last_index_name_desc = o['name'] + o['desc']  
             }
-            */
             //convert timestamp to string
             let cDate = o['createTime'].toDate()
             o['createTime'] = cDate.toDateString()
@@ -50,7 +50,17 @@ export class UserService {
           this.obs.next(user_observations)
         }, error => {
           console.log('error getting observations',error)
-      })
+      });
+
+
+      this.firestore.collection('user/'+ this.user.uid+'/vpk-analysis').
+        valueChanges({ idField: 'doc_id' }).subscribe(
+          vpkAnalysis => { 
+            console.log(vpkAnalysis);
+            this.vpkAnalysis.next(vpkAnalysis)}
+        )
+
+
     })
   }
 
@@ -58,14 +68,22 @@ export class UserService {
     return this.obs;
   }
 
+  get_vpk_analysis() {
+    return this.vpkAnalysis;
+  }
+
   set_as_hide(doc_id) {
-    this.firestore.doc('user/'+ this.user.uid+'/observations/'+doc_id).update({show:false})
+    this.firestore.doc('user/'+ this.user.uid+'/observations/'+doc_id).update({hide:true})
   }
 
   add_user_sym(sym) {
     let doc_id = this.firestore.createId();
-    sym.show = true;
     return this.firestore.doc('user/'+ this.user.uid+'/observations/'+doc_id).set(sym);
+  }
+
+  add_vpk_answers(testAnswers) {
+    let doc_id = this.firestore.createId();
+    return this.firestore.doc('user/'+ this.user.uid+'/vpk/'+doc_id).set(testAnswers);
   }
 
 }

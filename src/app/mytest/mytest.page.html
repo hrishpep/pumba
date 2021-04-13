@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Ayurvedic DNA Analysis</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <div *ngFor="let test of tests" >
+  <ion-radio-group [(ngModel)]="test.answer">
+    <ion-list-header><h2>{{test.question}}</h2></ion-list-header>
+    <ion-item>
+      <ion-label>{{test.v}}</ion-label>
+      <ion-radio value="v"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{test.p}}</ion-label>
+      <ion-radio value="p"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{test.k}}</ion-label>
+      <ion-radio value="k"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+
+  <ion-item-divider color="light">
+    <ion-label></ion-label>
+  </ion-item-divider>
+
+  </div>
+ 
+  
+  
+  <ion-button expand="block" color="danger" (click)="submit()">Submit</ion-button>
+
+</ion-content>

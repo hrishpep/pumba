@@ -27,6 +27,7 @@ export class QAuthService {
     //listen to all updates
     this.fAuth.authState
         .subscribe(status => {
+          console.log('STATUS CHANGED',status)
           this.signedIn.next((status != null))
           if(status != null) { 
             let _user = new QUser();
