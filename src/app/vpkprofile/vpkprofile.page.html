@@ -9,9 +9,11 @@
   <p>please wait</p>
 </div>
 
-
-<ion-list id="container" *ngIf="value && value.length!=0">
-  <ion-item color="danger"><b>{{value[0].result}}</b></ion-item>
+<ion-list *ngIf="value && value.length!=0">
+  <ion-item>
+    <ion-img id="helix" src="/assets/thelix.png"></ion-img>
+  </ion-item>
+  <ion-item color="light"><ion-label>Your chief Helix Quality: </ion-label><h2><b>{{value[0].result}}</b></h2></ion-item>
   <ion-item> <ion-label slot="start">Kapha</ion-label><ion-label slot="end">{{value[0].k}} %</ion-label></ion-item>
   <ion-item> <ion-label slot="start">Pitta</ion-label><ion-label slot="end">{{value[0].p}} %</ion-label></ion-item>
   <ion-item> <ion-label slot="start">Vaat</ion-label><ion-label slot="end">{{value[0].v}} %</ion-label></ion-item>
