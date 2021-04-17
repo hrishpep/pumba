@@ -23,6 +23,7 @@ export class SignupPage implements OnInit {
         this.isSignedIn = Boolean(status)
         console.log('status of login changed. User signedIN=' + this.isSignedIn); 
         if(status)
+
           console.log(status.email)
       }
     )
@@ -33,7 +34,7 @@ export class SignupPage implements OnInit {
   }
 
   loginSucceeded(evt) {
-    this._router.navigate(['mytest'])
+    this._router.navigate(['/mytest'])
     console.log('login was successful')
     console.log(evt)
 

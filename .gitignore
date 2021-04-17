@@ -352,3 +352,4 @@ MigrationBackup/
 .DS_Store
 src/environments/environment.prod.ts
 src/environments/environment.ts
+src/.vscode/launch.json

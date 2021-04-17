@@ -28,9 +28,11 @@ export class RouteGuard implements CanActivate {
                     this.status = status;
                 }
         )
-
+        /*
         if(this.status == null)
             return this.qAuth.isSignedIn()
         else return this.status;
+        */
+       return true;
     }
   }

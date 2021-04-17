@@ -9,10 +9,9 @@ import { Router } from '@angular/router'
 })
 export class MytestPage implements OnInit {
 
-  relationship:String;
+  desc:String;
   tests:any[];
   constructor(private uS: UserService, private router:Router) { 
-    this.relationship = 'family'
     this.tests = [
       {"question":"Your Face is", "v":"Long and Slender", "p":"Oval or Angular", "k":"Mostly round"},
       {"question":"Your Nose is", "v":"Small or Deviated", "p":"Sharp and pointy", "k":"Broad"},
@@ -44,8 +43,8 @@ export class MytestPage implements OnInit {
 
   submit() {
     let a:any = {}
-    a.createTime = new Date(Date.now()).toDateString()
     a.answers = this.tests
+    a.desc = this.desc
     this.uS.add_vpk_answers(a).then( success => 
       {this.router.navigate(['/vpkprofile'])}, failure => {console.log(failure)}
     )

@@ -9,11 +9,12 @@ export class UserObs {
 
 }
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+
+  static USER_DATA = 'user';
 
   public user:QUser;
   public obs:BehaviorSubject<any>;
@@ -27,7 +28,7 @@ export class UserService {
     this.qAuth.user.subscribe( u => { 
       console.log(u)
       this.user= u; 
-      this.firestore.collection('user/'+ this.user.uid+'/observations', 
+      this.firestore.collection(UserService.USER_DATA+'/'+ this.user.uid+'/observations', 
               ref => ref.orderBy("sym_doc_id").orderBy("createTime","desc")
           ).valueChanges({ idField: 'doc_id' }).subscribe(
         user_observations => { 
@@ -53,8 +54,7 @@ export class UserService {
       });
 
 
-      this.firestore.collection('user/'+ this.user.uid+'/vpk-analysis').
-        valueChanges({ idField: 'doc_id' }).subscribe(
+      this.firestore.collection(UserService.USER_DATA+'/'+ this.user.uid+'/vpk-analysis').valueChanges({ idField: 'doc_id' }).subscribe(
           _vpkAnalysis => { 
             console.log(_vpkAnalysis);
             this.vpkAnalysis.next(_vpkAnalysis)}
@@ -64,27 +64,27 @@ export class UserService {
     })
   }
 
+  // observations related methods
+  add_user_sym(sym) {
+    let doc_id = this.firestore.createId();
+    return this.firestore.doc(UserService.USER_DATA+'/'+ this.user.uid+'/observations/'+doc_id).set(sym);
+  }
+
   get_user_data(){
     return this.obs;
   }
 
-  get_vpk_analysis() {
-    console.log(':::::::: ',this.vpkAnalysis)
-    return this.vpkAnalysis;
-  }
-
   set_as_hide(doc_id) {
-    this.firestore.doc('user/'+ this.user.uid+'/observations/'+doc_id).update({hide:true})
+    this.firestore.doc(UserService.USER_DATA+'/'+ this.user.uid+'/observations/'+doc_id).update({hide:true})
   }
 
-  add_user_sym(sym) {
-    let doc_id = this.firestore.createId();
-    return this.firestore.doc('user/'+ this.user.uid+'/observations/'+doc_id).set(sym);
-  }
-
+  // vpk answers and analysis related
   add_vpk_answers(testAnswers) {
     let doc_id = this.firestore.createId();
-    return this.firestore.doc('user/'+ this.user.uid+'/vpk/'+doc_id).set(testAnswers);
+    return this.firestore.doc(UserService.USER_DATA+'/'+ this.user.uid+'/vpk/'+doc_id).set(testAnswers);
+  }
+  get_vpk_analysis() {
+    return this.vpkAnalysis;
   }
 
 }

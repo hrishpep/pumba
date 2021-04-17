@@ -5,7 +5,7 @@
 </ion-header>
 <ion-content>
 
-  <div *ngFor="let test of tests" >
+<div *ngFor="let test of tests" >
   <ion-radio-group [(ngModel)]="test.answer">
     <ion-list-header><h2>{{test.question}}</h2></ion-list-header>
     <ion-item>
@@ -25,11 +25,15 @@
   <ion-item-divider color="light">
     <ion-label></ion-label>
   </ion-item-divider>
+</div>
+<!-- end of loop for all questions-->
 
-  </div>
- 
+<ion-item>
+  <ion-label position="fixed" color="shakti">About you:</ion-label>
+  <ion-input [(ngModel)]="desc" placeholder="In about 10-15 words describe your personality"></ion-input>
+</ion-item> 
   
   
-  <ion-button expand="block" color="danger" (click)="submit()">Submit</ion-button>
+<ion-button [disabled]="!desc" expand="block" color="danger" (click)="submit()">Submit</ion-button>
 
 </ion-content>

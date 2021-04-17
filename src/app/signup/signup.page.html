@@ -6,18 +6,23 @@
     <br/>    
     <br/>
 
-    <ion-label *ngIf="isSignedIn">You are signed in. 
-      <ion-router-link href="mytest">Click here to proceed to your VPK test</ion-router-link>
-    </ion-label>
+    <p *ngIf="isSignedIn">You are signed in. </p>
+    <p  *ngIf="isSignedIn"><ion-router-link href="mytest">Click here to proceed to your VPK test</ion-router-link></p>
    
     <br/>
     <br/>
+    <br/>
+    <br/>
 
-      <ion-button *ngIf="isSignedIn" color="danger" (click)="logout()">Sign Out</ion-button>
+    <br/>
+
+      <ion-button fill="outline" shape="round" *ngIf="isSignedIn" color="dark" (click)="logout()">Sign Out</ion-button>
 
     <!-- refer to documentation here 
     https://github.com/RaphaelJenni/FirebaseUI-Angular
     --> 
+  
+    <p *ngIf="!isSignedIn">Please sign in for your Ayurvedic profile</p>
     <firebase-ui (signInSuccessWithAuthResult)="loginSucceeded($event)" 
     (signInFailure)="loginFailed($event)" ></firebase-ui>
     <!--
