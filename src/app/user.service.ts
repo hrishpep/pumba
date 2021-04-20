@@ -54,12 +54,11 @@ export class UserService {
       });
 
 
-      this.firestore.collection(UserService.USER_DATA+'/'+ this.user.uid+'/vpk-analysis').valueChanges({ idField: 'doc_id' }).subscribe(
+      this.firestore.collection(UserService.USER_DATA+'/'+ this.user.uid+'/vpk-analysis', ref=> ref.orderBy('utc','desc').limit(1)).valueChanges({ idField: 'doc_id' }).subscribe(
           _vpkAnalysis => { 
             console.log(_vpkAnalysis);
             this.vpkAnalysis.next(_vpkAnalysis)}
         )
-
 
     })
   }
